@@ -1,5 +1,25 @@
 <?php
 
+# wordpress4.unused.php is a PHP scripts to delete orphans files in WordPress
+# 4.x installations.
+#
+# Copyright (C) 2018 Ramon Roman Castro <ramonromancastro@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+define("RRC_VERSION","1.9");
+
 # ---------------------------------------------------------------------------------------
 # FUNCIONES
 # ---------------------------------------------------------------------------------------
@@ -31,7 +51,7 @@ function rrc_print_copyright(){
 	global $rrc_options;
 	echo "\nwordpress4.delete.unused.php - Calculate unused attachments\n";
 	echo "Ramón Román Castro <ramon.roman.c@juntadeandalucia.es>\n";
-	echo "Versión 1.8\n\n";
+	echo "Versión ".RRC_VERSION."\n\n";
 	if (!isset($rrc_options['f'])){
 		echo "Modo simulación [\033[01;92m ACTIVADO \033[0m]\n";
 	}
