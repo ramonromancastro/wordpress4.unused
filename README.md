@@ -1,14 +1,14 @@
 # wordpress-scripts
-Scripts para realizar tareas de mantenimiento de WordPress
-
-## wordpress4.unused.php
-
-[![N|Solid](http://php.net/images/logos/php-power-white.gif)](http://www.php.net/)
-
+Scripts para realizar tareas de mantenimiento de WordPress.
+## wordpress4.unused.php [![N|Solid](http://php.net/images/logos/php-power-white.gif)](http://www.php.net/)
 **wordpress4.unused.php** es un script para eliminar los archivos en desuso de instalaciones de WordPress 4.x. Los archivos que este script revisa, identifica y elimina son:
-
-  - Archvos subidos A WordPress que no están siendo utilizados por niguna página de WordPress.
-
+  - Archivos subidos a WordPress que no están siendo utilizados por niguna página de WordPress.
+```sql
+SELECT *
+FROM posts
+WHERE post_parent = 0 AND post_type = 'attachment'
+AND NOT EXISTS ( SELECT meta_id FROM postmeta WHERE meta_value = posts.ID AND meta_key IN ('_thumbnail_id','_product_image_gallery') )
+```
 ### Requisitos
  - WordPress 4.x
  - PHP 5.3 o superior
