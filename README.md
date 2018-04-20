@@ -12,9 +12,7 @@ AND NOT EXISTS ( SELECT meta_id FROM postmeta WHERE meta_value = posts.ID AND me
  - PHP 5.3 o superior
 
 ## Instalación
-```sh
-$ wget https://raw.githubusercontent.com/ramonromancastro/wordpress-scripts/master/wordpress4.unused.php
-```
+Descargar el archivo wordpress4.unused.php del repositorio de GitHub https://github.com/ramonromancastro/wordpress4.unused.
 ## Ejecución
 Para ver los comandos disponibles, ejecutar el comando
 ```sh
