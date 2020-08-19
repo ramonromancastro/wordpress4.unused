@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-define("RRC_VERSION","1.9.1");
+define("RRC_VERSION","1.9.2");
 
 # ---------------------------------------------------------------------------------------
 # FUNCIONES
@@ -128,36 +128,40 @@ $post_error = 0;
 rrc_start_progress($post_total);
 foreach ( $post_ids as $item ) {
 	rrc_print_progress();
-	$path = get_attached_file($item->ID);
-	
-	// Calculo de espacio en disco
-	$files_total++;
-	if (file_exists($path)){
-		$file = stat($path);
-		$post_free += $file['size'];
-	}
-	rrc_verbose($path);
-	$image_meta = wp_get_attachment_metadata( $item->ID );
-	if (isset($image_meta['sizes'])){
-		foreach($image_meta['sizes'] as $value){
-			$files_total++;
-			$dirname = dirname($path);
-			if (file_exists($dirname."/".$value['file'])){
-				$file = stat($dirname."/".$value['file']);
-				$post_free += $file['size'];
-			}
-			rrc_verbose("\t".$dirname."/".$value['file']);
+	$sqlNotInPostContent = "SELECT post_id FROM {$wpdb->prefix}postmeta WHERE post_id = " . $item->ID . " AND meta_key = '_wp_attached_file' AND NOT EXISTS (SELECT ID FROM {$wpdb->prefix}posts WHERE post_content LIKE CONCAT('%',meta_value,'%'))";
+	$reallyGeorge = $wpdb->get_results($sqlNotInPostContent);
+	if (count($reallyGeorge)){
+		$path = get_attached_file($item->ID);
+		
+		// Calculo de espacio en disco
+		$files_total++;
+		if (file_exists($path)){
+			$file = stat($path);
+			$post_free += $file['size'];
 		}
-	}
-	
-	// Eliminacion de los registros
-	if (isset($rrc_options['f'])) $result = wp_delete_attachment($item->ID,true); else $result = FALSE;
-	if ($result !== false) {
-		$post_delete++;
-	}
-	else{
-		if (isset($rrc_options['f'])) echo "[ \033[01;31mERROR\033[0m ] $path\n";
-		$post_error++;
+		rrc_verbose($path);
+		$image_meta = wp_get_attachment_metadata( $item->ID );
+		if (isset($image_meta['sizes'])){
+			foreach($image_meta['sizes'] as $value){
+				$files_total++;
+				$dirname = dirname($path);
+				if (file_exists($dirname."/".$value['file'])){
+					$file = stat($dirname."/".$value['file']);
+					$post_free += $file['size'];
+				}
+				rrc_verbose("\t".$dirname."/".$value['file']);
+			}
+		}
+		
+		// Eliminacion de los registros
+		if (isset($rrc_options['f'])) $result = wp_delete_attachment($item->ID,true); else $result = FALSE;
+		if ($result !== false) {
+			$post_delete++;
+		}
+		else{
+			if (isset($rrc_options['f'])) echo "[ \033[01;31mERROR\033[0m ] $path\n";
+			$post_error++;
+		}
 	}
 }
 
