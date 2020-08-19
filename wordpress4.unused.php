@@ -1,7 +1,6 @@
+#!/usr/bin/php
 <?php
-
-# wordpress4.unused.php is a PHP scripts to delete orphans files in WordPress
-# 4.x installations.
+# wordpress4.unused.php is a script to delete orphans WordPress files.
 #
 # Copyright (C) 2018 Ramon Roman Castro <ramonromancastro@gmail.com>
 #
@@ -18,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-define("RRC_VERSION","1.9.0");
+define("RRC_VERSION","1.9.1");
 
 # ---------------------------------------------------------------------------------------
 # FUNCIONES
@@ -49,7 +48,7 @@ function rrc_print_progress(){
 
 function rrc_print_copyright(){
 	global $rrc_options;
-	echo "\nwordpress4.delete.unused.php - Calculate unused attachments\n";
+	echo "\nwordpress4.unused.php - Calculate unused attachments\n";
 	echo "Ramón Román Castro <ramon.roman.c@juntadeandalucia.es>\n";
 	echo "Versión ".RRC_VERSION."\n\n";
 	if (!isset($rrc_options['f'])){
@@ -77,10 +76,10 @@ function rrc_print_site(){
 }
 
 function rrc_print_help(){
-	rrc_print_copyright();
-	echo "Usage: wordpress4.delete.unused.php -f -v\n\n";
+	echo "\nUsage: wordpress4.unused.php (-f) (-v) (-h)\n\n";
 	echo "\t-f ... Desactivar modo simulación (por defecto): los cambios son definitivos\n";
 	echo "\t-v ... Modo detallado\n";
+	echo "\t-h ... Muestra esta ayuda\n";
 	echo "\n";
 	exit;
 }
@@ -94,8 +93,8 @@ function rrc_verbose($text){
 # Lectura de parámetros y carga de la configuración
 # ---------------------------------------------------------------------------------------
 
-$rrc_options = getopt("fv");
-if (!is_array($rrc_options) ) {
+$rrc_options = getopt("fvh");
+if (!is_array($rrc_options) || isset($rrc_options['h'])) {
 	rrc_print_help();
 }
 
