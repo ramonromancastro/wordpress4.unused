@@ -9,7 +9,7 @@ WHERE post_parent = 0 AND post_type = 'attachment'
 AND NOT EXISTS ( SELECT meta_id FROM postmeta WHERE meta_value = posts.ID AND meta_key IN ('_thumbnail_id','_product_image_gallery') )
 ```
 
-> **MUY IMPORTANTE:** Este script **no** comprueba que la imagen se esté referenciando directamente desde el contenido de los posts u otros elementos.
+> **MUY IMPORTANTE:** Además de la consuñta, este script **sólo** comprueba que la imagen **no** se esté referenciando directamente en posts.post_content, pero no en otros campos.
 
 ## Requisitos
  - WordPress 4.x
