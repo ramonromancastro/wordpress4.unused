@@ -1,4 +1,5 @@
 # wordpress4.unused.php [![N|Solid](http://php.net/images/logos/php-power-white.gif)](http://www.php.net/)
+
 **wordpress4.unused.php** es un script para eliminar los archivos en desuso de instalaciones de WordPress 4.x. Los archivos que este script revisa, identifica y elimina son:
   - Archivos subidos a WordPress que no están siendo utilizados por niguna página de WordPress.
 ```sql
@@ -7,6 +8,9 @@ FROM posts
 WHERE post_parent = 0 AND post_type = 'attachment'
 AND NOT EXISTS ( SELECT meta_id FROM postmeta WHERE meta_value = posts.ID AND meta_key IN ('_thumbnail_id','_product_image_gallery') )
 ```
+
+> **MUY IMPORTANTE:** Este script **no** comprueba que la imagen se esté referenciando directamente desde el contenido de los posts u otros elementos.
+
 ## Requisitos
  - WordPress 4.x
  - PHP 5.3 o superior
