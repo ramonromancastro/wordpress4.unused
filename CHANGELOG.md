@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.1] - 2020-08-19
+### Added
+- Añadida cabecera para permitir la ejecución directa del script desde bash.
+
+### Changed
+- Modificada la cabecera que se muestra cada vez que se ejecuta el script.
+
+### Fixed
+- Ahora la ayuda se muestra cuando se utiliza el parámetro -h.
+
 ## [1.9.0] - 2018-04-20
 ### Added
 - Primera versión completamente funcional del script.
