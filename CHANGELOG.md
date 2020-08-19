@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.2] - 2020-08-19
+### Added
+- Comprobación de que el archivo no se está referenciando en posts.post_content.
+
 ## [1.9.1] - 2020-08-19
 ### Added
 - Añadida cabecera para permitir la ejecución directa del script desde bash.
